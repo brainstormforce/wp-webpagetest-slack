@@ -135,7 +135,7 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 							$test .= 'URL : ' . $value->firstView->URL  . ' | ';
 							$test .= 'Time : ' . $value->firstView->fullyLoaded / 1000 . ' Seconds | ';
 							$test .= 'Requests : ' . $value->firstView->requestsFull . ' | ';
-							$test .= 'Bytes In ' . $value->firstView->bytesIn / 1000 . ' KB | ';
+							$test .= 'Bytes In : ' . $value->firstView->bytesIn / 1000 . ' KB | ';
 
 							$test .= '* REPEAT VIEW *  | ';
 							$test .= 'URL : ' . $value->repeatView->URL  . '  |  ';
@@ -144,9 +144,9 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 							$test .= 'Bytes In : ' . $value->repeatView->bytesIn / 1000 . ' KB  |  ';
 						}
 						$test .= 'View Full Summary : ' . $body->data->summary;
-						
-						self::wsn_send_slack_message( $test );
+
 						delete_option( 'wpt_test_id' );
+						self::wsn_send_slack_message( $test );
 				}
 			} // check test id ends
 		}
