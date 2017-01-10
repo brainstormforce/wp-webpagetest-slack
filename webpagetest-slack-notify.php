@@ -2,14 +2,14 @@
 /*
  * Plugin Name: Webpagetest Slack Notify
  * Plugin URI: http://www.brainstormforce.com/
- * Description: Notify webpagetest report to your slack chennel
+ * Description: Notify webpagetest report to your slack channel
  * Author: Brainstorm Force
  * Version: 1.0.0
  * Author URI: http://www.brainstormforce.com/
  * Text Domain: webpagetest-slack-notify
 /**
  * Webpagetest Slack Notify
- * Copyright (C) 2016
+ * Copyright (C) 2017
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
