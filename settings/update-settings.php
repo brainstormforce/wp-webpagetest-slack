@@ -34,7 +34,6 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			//pre upgrade
 
 			$test_id = get_option( 'wpt_test_id' );
-			
 			if ( isset( $test_id ) && ! empty( $test_id ) ) {
 
 				self::get_test_results( $test_id );
@@ -131,17 +130,17 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 						$test .= 'Location : ' . $body->data->location  . ' | ';
 						foreach ( $body->data->runs as $key => $value) {
 	
-							$test .= '* FIRST VIEW *  | ';
-							$test .= 'URL : ' . $value->firstView->URL  . ' | ';
-							$test .= 'Time : ' . $value->firstView->fullyLoaded / 1000 . ' Seconds | ';
-							$test .= 'Requests : ' . $value->firstView->requestsFull . ' | ';
-							$test .= 'Bytes In : ' . $value->firstView->bytesIn / 1000 . ' KB | ';
+							$test .= '*First View* ';
+							$test .= 'URL : `' . $value->firstView->URL  . '` | ';
+							$test .= 'Time : `' . $value->firstView->fullyLoaded / 1000 . '` Seconds | ';
+							$test .= 'Requests : `' . $value->firstView->requestsFull . '` | ';
+							$test .= 'Bytes In : `' . $value->firstView->bytesIn / 1000 . ' KB` | ';
 
-							$test .= '* REPEAT VIEW *  | ';
-							$test .= 'URL : ' . $value->repeatView->URL  . '  |  ';
-							$test .= 'Time : ' . $value->repeatView->fullyLoaded / 1000 . ' Seconds | ';
-							$test .= 'Requests : ' . $value->repeatView->requestsFull . '  |  ';
-							$test .= 'Bytes In : ' . $value->repeatView->bytesIn / 1000 . ' KB  |  ';
+							$test .= '*Repeat View* ';
+							$test .= 'URL : `' . $value->repeatView->URL  . '`  |  ';
+							$test .= 'Time : `' . $value->repeatView->fullyLoaded / 1000 . ' Seconds` | ';
+							$test .= 'Requests : `' . $value->repeatView->requestsFull . '`  |  ';
+							$test .= 'Bytes In : `' . $value->repeatView->bytesIn / 1000 . ' KB` |  ';
 						}
 						$test .= 'View Full Summary : ' . $body->data->summary;
 
