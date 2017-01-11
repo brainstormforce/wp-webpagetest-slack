@@ -126,23 +126,18 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 
 						$body = json_decode( $body );
 						$test = '';
-						
-						$test .= 'Location : ' . $body->data->location  . ' | ';
 						foreach ( $body->data->runs as $key => $value) {
 	
-							$test .= '*First View* ';
-							$test .= 'URL : `' . $value->firstView->URL  . '` | ';
-							$test .= 'Time : `' . $value->firstView->fullyLoaded / 1000 . '` Seconds | ';
-							$test .= 'Requests : `' . $value->firstView->requestsFull . '` | ';
-							$test .= 'Bytes In : `' . $value->firstView->bytesIn / 1000 . ' KB` | ';
-
-							$test .= '*Repeat View* ';
-							$test .= 'URL : `' . $value->repeatView->URL  . '`  |  ';
-							$test .= 'Time : `' . $value->repeatView->fullyLoaded / 1000 . ' Seconds` | ';
-							$test .= 'Requests : `' . $value->repeatView->requestsFull . '`  |  ';
-							$test .= 'Bytes In : `' . $value->repeatView->bytesIn / 1000 . ' KB` |  ';
+							$test .= '```URL: ' . $value->firstView->URL  . '
+';
+							$test .= 'Time: ' . $value->firstView->fullyLoaded / 1000 . ' Seconds
+';
+							$test .= 'Requests: ' . $value->firstView->requestsFull . '
+';
+							$test .= 'Bytes In : ' . $value->firstView->bytesIn / 1000 . 'KB
+';
 						}
-						$test .= 'View Full Summary : ' . $body->data->summary;
+						$test .= 'View Full Summary : ' . $body->data->summary . '```';
 
 						delete_option( 'wpt_test_id' );
 						self::wsn_send_slack_message( $test );
@@ -159,7 +154,6 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			}
 			return $default;
 		}
-
 	} // class end
 } // class condition end
 

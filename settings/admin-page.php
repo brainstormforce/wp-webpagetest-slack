@@ -58,7 +58,7 @@ if ( ! class_exists( 'WS_Notify' ) ) :
 							</p>
 						<input type="text" class="regular-text" name="webpage-apikey" value="<?php echo $webpage_apikey; ?>" class="regular-text" />
 							<p class="admin-help">
-								<i><?php _e('Need API key? Get it ', 'webpagetest-slack-notify'); ?><a target='_blank' href="https://www.webpagetest.org/getkey.php"><?php _e(' here.', 'webpagetest-slack-notify'); ?></a></i>
+								<i><?php _e('Need API key? Get one ', 'webpagetest-slack-notify'); ?><a target='_blank' href="https://www.webpagetest.org/getkey.php"><?php _e(' here.', 'webpagetest-slack-notify'); ?></a></i>
 							</p>
 					</div>
 
