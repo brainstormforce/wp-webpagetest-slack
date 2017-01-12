@@ -134,10 +134,10 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 ';
 							$test .= 'Requests: ' . $value->firstView->requestsFull . '
 ';
-							$test .= 'Bytes In : ' . $value->firstView->bytesIn / 1000 . 'KB
+							$test .= 'Bytes In: ' . $value->firstView->bytesIn / 1000 . ' KB
 ';
 						}
-						$test .= 'View Full Summary : ' . $body->data->summary . '```';
+						$test .= 'View Full Summary: ' . $body->data->summary . '```';
 
 						delete_option( 'wpt_test_id' );
 						self::wsn_send_slack_message( $test );
