@@ -24,9 +24,8 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			// Register submenu
 			
 			// Runs when the plugin is upgraded.
-			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ) );
-			add_action( 'save_post', array( $this, 'wpt_upgrader_process_complete' ) );
-			add_action( 'post_updated', array( $this, 'wpt_upgrader_process_complete' ) );
+			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ), 100 );
+			add_action( 'save_post', array( $this, 'wpt_upgrader_process_complete' ), 100 );
 
  			// Fires once an attachment has been added.
 			add_action( 'add_attachment', array( $this, 'wpt_upgrader_process_complete' ), 100 );
