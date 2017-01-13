@@ -124,16 +124,17 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 					$code = wp_remote_retrieve_response_code( $response );
 
 						$body = json_decode( $body );
-						$test = '';
+						$test = '```';
 						foreach ( $body->data->runs as $key => $value) {
 	
-							$test .= '```URL: ' . $value->firstView->URL  . '
+							$test .= 'URL: ' . $value->firstView->URL  . '
 ';
 							$test .= 'Time: ' . $value->firstView->fullyLoaded / 1000 . ' Seconds
 ';
 							$test .= 'Requests: ' . $value->firstView->requestsFull . '
 ';
 							$test .= 'Bytes In: ' . $value->firstView->bytesIn / 1000 . ' KB
+
 ';
 						}
 						$test .= 'View Full Summary: ' . $body->data->summary . '```';
