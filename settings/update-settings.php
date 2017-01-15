@@ -51,6 +51,11 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			$post_url = get_permalink( $post_id );
 
 			$test_id = self::fetch_testId( $post_url );
+
+			$action = get_post_type( $post_id );
+
+			update_option( 'wpt_test_action', $action.' published/updated.' );
+
 			update_option( 'wpt_test_id', $test_id );		
 		}
 
@@ -141,11 +146,15 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 
 					$code = wp_remote_retrieve_response_code( $response );
 
+					$test_acion = get_option( 'wpt_test_action' );
+
 						$body = json_decode( $body );
 						$test = '```';
 						foreach ( $body->data->runs as $key => $value) {
 	
 							$test .= 'URL: ' . $value->firstView->URL  . '
+';
+							$test .= 'Action: ' . $test_acion . '
 ';
 							$test .= 'Time: ' . $value->firstView->fullyLoaded / 1000 . ' Seconds
 ';
