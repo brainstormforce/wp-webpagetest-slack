@@ -25,7 +25,7 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			
 			// Runs when the plugin is upgraded.
 			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ), 100 );
-			add_action( 'save_post', array( $this, 'wpt_upgrader_process_complete' ), 100 );
+			add_action( 'save_post', array( $this, 'wpt_save_post_results' ), 100 );
 
  			// Fires once an attachment has been added.
 			add_action( 'add_attachment', array( $this, 'wpt_upgrader_process_complete' ), 100 );
@@ -38,6 +38,20 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 				self::get_test_results( $test_id );
 			}	
 			self::update_settings();
+		}
+
+		public function wpt_save_post_results( $post_id ) {
+		
+			if ( wp_is_post_revision( $post_id ) ) {
+
+				return;
+			}
+
+			$post_title = get_the_title( $post_id );
+			$post_url = get_permalink( $post_id );
+
+			$test_id = self::fetch_testId( $post_url );
+			update_option( 'wpt_test_id', $test_id );		
 		}
 
 		public function wpt_upgrader_process_complete() {
@@ -80,11 +94,15 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 				) ); 
 		}
 
-		public function fetch_testId() {
+		public function fetch_testId( $url = '' ) {
 			
 			$key = self::get_config('webpage_apikey');
 			$runs = self::get_config('wpttest_tests');
-			$url = self::get_config('wpttest_url');
+			
+			if( ! isset( $url ) ) {
+				
+				$url = self::get_config('wpttest_url');
+			}
 			
 			$request = 'http://www.webpagetest.org/runtest.php?url=' . $url .'&runs=' . $runs .'&f=json&k=' . $key;
 
