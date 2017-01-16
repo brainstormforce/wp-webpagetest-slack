@@ -24,11 +24,8 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			// Register submenu
 			
 			// Runs when the plugin is upgraded.
-			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ), 100 );
+			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ), 100, 2 );
 			add_action( 'save_post', array( $this, 'wpt_save_post_results' ), 100 );
-
- 			// Fires once an attachment has been added.
-			add_action( 'add_attachment', array( $this, 'wpt_upgrader_process_complete' ), 100 );
 
 			//pre upgrade
 
@@ -59,10 +56,35 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			update_option( 'wpt_test_id', $test_id );		
 		}
 
-		public function wpt_upgrader_process_complete() {
-			
+		public function wpt_upgrader_process_complete( $upgrader_object, $options ) {
+		
 			$test_id = self::fetch_testId();
-			update_option( 'wpt_test_id', $test_id );		
+			update_option( 'wpt_test_id', $test_id );
+
+			if ( ! is_object( $upgrader_object ) ) {
+
+				return;
+			}
+
+			$upgrade_class = get_class( $upgrader_object );
+
+			switch ( $upgrade_class ) {
+
+				case 'Plugin_Upgrader':
+					$plugin_info = $upgrader_object->skin->plugin_info;
+					$name = $plugin_info['Name'];
+					break;
+
+				case 'Theme_Upgrader':
+					$theme_info = $upgrader_object->skin->result;
+					$name = $theme_info['destination_name'];
+					break;
+
+				default:
+					return;
+			}
+
+			update_option( 'wpt_test_action', $name.' installed/updated.' );
 		}
 
 		public static function update_settings() {
