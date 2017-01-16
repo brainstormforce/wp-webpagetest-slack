@@ -2,9 +2,9 @@
 /*
  * Plugin Name: Webpagetest Slack Notify
  * Plugin URI: http://www.brainstormforce.com/
- * Description: Notify webpagetest report to your slack channel
+ * Description: Notify webpagetest report to your slack channel on published post or page and upgrade theme or plugin.
  * Author: Brainstorm Force
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author URI: http://www.brainstormforce.com/
  * Text Domain: webpagetest-slack-notify
 /**
