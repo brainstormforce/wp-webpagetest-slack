@@ -126,11 +126,11 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			$key = self::get_config('webpage_apikey');
 			$runs = self::get_config('wpttest_tests');
 			
-			if( ! isset( $url ) ) {
+			if( empty( $url ) ) {
 				
 				$url = self::get_config('wpttest_url');
 			}
-			
+
 			$request = 'http://www.webpagetest.org/runtest.php?url=' . $url .'&runs=' . $runs .'&f=json&k=' . $key;
 
 			$response = wp_remote_get( $request );
@@ -189,6 +189,7 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 						$test .= 'View Full Summary: ' . $body->data->summary . '```';
 
 						delete_option( 'wpt_test_id' );
+						delete_option( 'wpt_test_action' );
 						self::wsn_send_slack_message( $test );
 				}
 			} // check test id ends
