@@ -1,14 +1,14 @@
 <?php
 /*
- * Plugin Name: Webpagetest Slack Notify
+ * Plugin Name: WebPageTest Slack
  * Plugin URI: http://www.brainstormforce.com/
- * Description: Notify webpagetest report to your slack channel on published post or page and upgrade theme or plugin.
+ * Description: Get your website automatically tested for performance / speed and get results on Slack.
  * Author: Brainstorm Force
- * Version: 1.1.0
+ * Version: 1.0.0
  * Author URI: http://www.brainstormforce.com/
- * Text Domain: webpagetest-slack-notify
+ * Text Domain: webpagetest-slack
 /**
- * Webpagetest Slack Notify
+ * WebPageTest Slack
  * Copyright (C) 2017
  *
  * This program is free software: you can redistribute it and/or modify
@@ -25,9 +25,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-if ( ! function_exists( 'add_action' ) ) {
-	echo 'Plugin can not do much when called directly.';
-	exit;
+// exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit();
 }
 
 define( 'WSN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -37,4 +37,4 @@ define( 'WSN_PLUGIN_URL', plugins_url( '/', __FILE__ ) );
  * Initiate plugin
  */
 require_once( WSN_PLUGIN_DIR . 'settings/admin-page.php' );
-$WS_Notify = WS_Notify::instance();
+$WPT_Slack = WPT_Slack::instance();

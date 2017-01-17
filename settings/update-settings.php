@@ -4,16 +4,16 @@
  *
  * @since 1.0.0
  */
-if ( ! class_exists( 'WS_Notify_Update' ) ) {
+if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 
-	class WS_Notify_Update {
+	class WPT_Slack_Update {
 
 		private static $instance;
 
 		public static function instance() {
 			
 			if ( ! isset( self::$instance ) ) {
-				self::$instance = new WS_Notify_Update();
+				self::$instance = new WPT_Slack_Update();
 				self::$instance->hooks();
 			}
 			return self::$instance;
@@ -89,7 +89,7 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 
 		public static function update_settings() {
 
-			if ( isset( $_POST['webpagetest-slack-notify'] ) && wp_verify_nonce( $_POST['webpagetest-slack-notify'], 'wptslack' ) ) {
+			if ( isset( $_POST['webpagetest-slack'] ) && wp_verify_nonce( $_POST['webpagetest-slack'], 'wptslack' ) ) {
 
 				$option = array();
 				$option['slack_url'] = isset( $_POST['slack-url'] ) ? esc_url( $_POST['slack-url'] ) : '';
@@ -98,7 +98,7 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 				$option['webpage_apikey'] = isset( $_POST['webpage-apikey'] ) ? esc_attr( $_POST['webpage-apikey'] ) : '';
 				$option['wpttest_url'] = isset( $_POST['wpttest-url'] ) ? esc_url( $_POST['wpttest-url'] ) : '';
 
-				update_option( 'webpagetest-slack-notify', $option );
+				update_option( 'webpagetest-slack', $option );
 			}
 		}
 
@@ -197,7 +197,7 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 			
 		public static function get_config( $setting = '', $default = '' ) {
 			
-			$options = get_option( 'webpagetest-slack-notify' );
+			$options = get_option( 'webpagetest-slack' );
 			
 			if ( isset( $options[ $setting ] ) ) {
 				return $options[ $setting ];
@@ -209,6 +209,6 @@ if ( ! class_exists( 'WS_Notify_Update' ) ) {
 
 function wsn_notify_update() {
 
-	$WS_Notify_Update = WS_Notify_Update::instance();
+	$WPT_Slack_Update = WPT_Slack_Update::instance();
 }
 add_action( 'plugins_loaded', 'wsn_notify_update' );
