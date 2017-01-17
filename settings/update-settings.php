@@ -21,11 +21,10 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 
 		public function hooks() {
 			
-			// Register submenu
-			
 			// Runs when the plugin is upgraded.
 			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ), 100, 2 );
 			add_action( 'save_post', array( $this, 'wpt_save_post_results' ), 100 );
+			add_action( 'init', array( $this, 'send_report' ), 100 );
 
 			$all_plugins = get_plugins();
 			
@@ -35,13 +34,16 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 				register_deactivation_hook( $dir, array( $this, 'run_plugin_status_change' ) );
 				register_activation_hook( $dir, array( $this, 'run_plugin_status_change' ) );
 			}
+			self::update_settings();
+		}
 
+		public function send_report() {
+			
 			$test_id = get_option( 'wpt_test_id' );
 			if ( isset( $test_id ) && ! empty( $test_id ) ) {
 
 				self::get_test_results( $test_id );
 			}	
-			self::update_settings();
 		}
 
 		public function run_plugin_status_change() {
