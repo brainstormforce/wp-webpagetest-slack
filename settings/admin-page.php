@@ -36,28 +36,43 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 		}
 
 		public static function webpagetest_slack_page() {
+
+			$test_id = get_option( 'wpt_test_id' );
+			$webpage_apikey = $wpttest_tests = $slack_url = $slack_channel = $wpttest_url = '';
+			
+			$webpage_apikey	= WPT_Slack_Update::get_config('webpage_apikey');
+			$wpttest_url = WPT_Slack_Update::get_config('wpttest_url');
+			$wpttest_tests = WPT_Slack_Update::get_config('wpttest_tests');
+			$slack_url = WPT_Slack_Update::get_config('slack_url');
+			$slack_channel = WPT_Slack_Update::get_config('slack_channel');
 		?>
 			<div class="wrap">
- 
-				<h1 class="wp-heading-inline"><?php _e( 'Webpagetest Slack', 'webpagetest-slack'); ?></h1>
-					<form id="wsn-runnow-form" action="#" method="post" style="display: inline;">
-						<input type="submit" id="doaction" class="button action" value='Run Now' style="margin: 10px;" />
-						<?php wp_nonce_field( 'wptslackrun', 'webpagetest-slack-run' ); ?>
-					</form>
-			<?php
-			
-				$webpage_apikey = $wpttest_tests = $slack_url = $slack_channel = $wpttest_url = '';
+ 					<div class='wpt-wrap'>
+						<h1 class="wp-heading-inline"><?php _e( 'Webpagetest Slack', 'webpagetest-slack'); ?></h1>
+						<form id="wsn-runnow-form" action="#" method="post" style="display: inline;">
+							<input type="submit" id="doaction" class="button action" value='Run Now' style="margin: 10px;" />
+							<?php wp_nonce_field( 'wptslackrun', 'webpagetest-slack-run' ); ?>
+						</form>
+					</div>
+				<?php		
 				
-				$webpage_apikey	= WPT_Slack_Update::get_config('webpage_apikey');
-				$wpttest_url = WPT_Slack_Update::get_config('wpttest_url');
-				$wpttest_tests = WPT_Slack_Update::get_config('wpttest_tests');
-				$slack_url = WPT_Slack_Update::get_config('slack_url');
-				$slack_channel = WPT_Slack_Update::get_config('slack_channel');
-
 				if ( empty( $wpttest_url ) ) {
-					$wpttest_url = get_site_url();	
+					$wpttest_url = get_site_url();
 				}
-			?>
+			
+				if ( isset( $_POST['webpagetest-slack-run'] ) && wp_verify_nonce( $_POST['webpagetest-slack-run'], 'wptslackrun' ) ) {	
+						
+					if ( isset( $test_id ) && ! empty( $test_id ) ) {	?>
+					
+					<div id="message" class="updated notice notice-success is-dismissible" style="position: absolute;">
+						<p><?php _e('Test is running. You will get results on Slack after test complete.', 'webpagetest-slack'); ?></p>
+						<button type="button" class="notice-dismiss">
+							<span class="screen-reader-text"><?php _e('Dismiss this notice.', 'webpagetest-slack'); ?></span>
+						</button>
+					</div>
+			
+				<?php } } ?>
+
 			    <form id="wsn-option-form" action="#" method="post" >
 			     	
 		    		<div class="apmw-config-fields">
@@ -105,7 +120,7 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 					</div>
 
 					<p class="submit">
-						<input type="submit" name="wsn-save" class="button-primary" value="<?php esc_attr_e( 'Save', 'webpagetest-slack' ); ?>" />
+						<input type="submit" name="wsn-save" class="button-primary" value="<?php esc_attr_e( 'Save Settings', 'webpagetest-slack' ); ?>" />
 					</p>
 					<?php wp_nonce_field( 'wptslack', 'webpagetest-slack' ); ?>
 			    </form>

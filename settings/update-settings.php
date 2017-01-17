@@ -120,6 +120,7 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 				$test_id = self::fetch_testId();
 				update_option( 'wpt_test_id', $test_id );
 				update_option( 'wpt_test_action', ' Manual Trigger.' );
+
 			}
 		}
 
