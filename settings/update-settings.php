@@ -27,7 +27,14 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 			add_action( 'upgrader_process_complete', array( $this, 'wpt_upgrader_process_complete' ), 100, 2 );
 			add_action( 'save_post', array( $this, 'wpt_save_post_results' ), 100 );
 
-			//pre upgrade
+			$all_plugins = get_plugins();
+			
+			foreach ( $all_plugins as $key => $value ) {
+
+				$dir = WP_PLUGIN_DIR . "/" . $key;
+				register_deactivation_hook( $dir, array( $this, 'run_plugin_status_change' ) );
+				register_activation_hook( $dir, array( $this, 'run_plugin_status_change' ) );
+			}
 
 			$test_id = get_option( 'wpt_test_id' );
 			if ( isset( $test_id ) && ! empty( $test_id ) ) {
@@ -35,6 +42,13 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 				self::get_test_results( $test_id );
 			}	
 			self::update_settings();
+		}
+
+		public function run_plugin_status_change() {
+
+			$test_id = self::fetch_testId();
+			update_option( 'wpt_test_id', $test_id );
+			update_option( 'wpt_test_action', ' Plugin activate / deactivate.' );
 		}
 
 		public function wpt_save_post_results( $post_id ) {
@@ -51,7 +65,7 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 
 			$action = get_post_type( $post_id );
 
-			update_option( 'wpt_test_action', $action.' published/updated.' );
+			update_option( 'wpt_test_action', $action.' published / updated.' );
 
 			update_option( 'wpt_test_id', $test_id );		
 		}
