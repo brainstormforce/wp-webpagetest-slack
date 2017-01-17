@@ -100,6 +100,11 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 
 				update_option( 'webpagetest-slack', $option );
 			}
+			if ( isset( $_POST['webpagetest-slack-run'] ) && wp_verify_nonce( $_POST['webpagetest-slack-run'], 'wptslackrun' ) ) {
+				$test_id = self::fetch_testId();
+				update_option( 'wpt_test_id', $test_id );
+				update_option( 'wpt_test_action', ' Manual Trigger.' );
+			}
 		}
 
 		public static function wsn_send_slack_message( $message ) {
@@ -121,7 +126,7 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 				) ); 
 		}
 
-		public function fetch_testId( $url = '' ) {
+		public static function fetch_testId( $url = '' ) {
 			
 			$key = self::get_config('webpage_apikey');
 			$runs = self::get_config('wpttest_tests');
@@ -141,6 +146,11 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 			}
 			$body = wp_remote_retrieve_body( $response );
 			$body = json_decode( $body );
+			
+			if ( $body->statusCode !== 200) {
+				
+				return;
+			}
 
 			return $body->data->testId;
 

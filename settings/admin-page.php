@@ -38,28 +38,38 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 		public static function webpagetest_slack_page() {
 		?>
 			<div class="wrap">
-				<h1><?php _e( 'Webpagetest Slack Notify', 'webpagetest-slack'); ?></h1>
+ 
+				<h1 class="wp-heading-inline"><?php _e( 'Webpagetest Slack', 'webpagetest-slack'); ?></h1>
+					<form id="wsn-runnow-form" action="#" method="post" style="display: inline;">
+						<input type="submit" id="doaction" class="button action" value='Run Now' style="margin: 10px;" />
+						<?php wp_nonce_field( 'wptslackrun', 'webpagetest-slack-run' ); ?>
+					</form>
 			<?php
 			
-				$webpage_apikey = $wpttest_url = $wpttest_tests = $slack_url = $slack_channel = '';
+				$webpage_apikey = $wpttest_tests = $slack_url = $slack_channel = $wpttest_url = '';
 				
 				$webpage_apikey	= WPT_Slack_Update::get_config('webpage_apikey');
 				$wpttest_url = WPT_Slack_Update::get_config('wpttest_url');
 				$wpttest_tests = WPT_Slack_Update::get_config('wpttest_tests');
 				$slack_url = WPT_Slack_Update::get_config('slack_url');
 				$slack_channel = WPT_Slack_Update::get_config('slack_channel');
+
+				if ( empty( $wpttest_url ) ) {
+					$wpttest_url = get_site_url();	
+				}
 			?>
-			    <form id="wsn-option-form" action="#" method="post">
+			    <form id="wsn-option-form" action="#" method="post" >
 			     	
 		    		<div class="apmw-config-fields">
 						<h4><?php _e( 'Webpagetest API Key', 'webpagetest-slack' ); ?></h4>
-							<p class="admin-help">
-								<i><?php _e('Enter your Webpagetest API Key here', 'webpagetest-slack'); ?></i>
-							</p>
+						<p class="admin-help">
+							<i><?php _e('Enter your Webpagetest API Key here', 'webpagetest-slack'); ?></i>
+						</p>
+					
 						<input type="text" class="regular-text" name="webpage-apikey" value="<?php echo $webpage_apikey; ?>" class="regular-text" />
-							<p class="admin-help">
-								<i><?php _e('Need API key? Get one ', 'webpagetest-slack'); ?><a target='_blank' href="https://www.webpagetest.org/getkey.php"><?php _e(' here.', 'webpagetest-slack'); ?></a></i>
-							</p>
+						<p class="admin-help">
+							<i><?php _e('Need API key? Get one ', 'webpagetest-slack'); ?><a target='_blank' href="https://www.webpagetest.org/getkey.php"><?php _e(' here.', 'webpagetest-slack'); ?></a></i>
+						</p>
 					</div>
 
 					<div class="apmw-config-fields">
