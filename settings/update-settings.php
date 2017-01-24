@@ -299,18 +299,15 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 						$test = '```';
 
 					foreach ( $body->data->runs as $key => $value ) {
-						//@codingStandardsIgnoreStart 
-						$test .= 'URL: ' . $value->firstView->URL . '
-';
-						$test .= 'Action: ' . $test_acion . '
-';
-						$test .= 'Time: ' . $value->firstView->fullyLoaded / 1000 . ' Seconds
-';
-						$test .= 'Requests: ' . $value->firstView->requestsFull . '
-';
-						$test .= 'Bytes In: ' . $value->firstView->bytesIn / 1000 . ' KB
 
-';
+						//@codingStandardsIgnoreStart 
+						
+						$test .= 'URL: ' . $value->firstView->URL . PHP_EOL;
+						$test .= 'Action: ' . $test_acion . PHP_EOL;
+						$test .= 'Time: ' . $value->firstView->fullyLoaded / 1000 . ' Seconds '. PHP_EOL;
+						$test .= 'Requests: ' . $value->firstView->requestsFull . PHP_EOL;
+						$test .= 'Bytes In: ' . $value->firstView->bytesIn / 1000 . ' KB '. PHP_EOL;
+						
 						//@codingStandardsIgnoreEnd
 					}
 						$test .= 'View Full Summary: ' . $body->data->summary . '```';
