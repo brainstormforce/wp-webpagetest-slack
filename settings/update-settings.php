@@ -26,6 +26,12 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
 			add_action( 'save_post', array( $this, 'wpt_save_post_results' ), 100 );
 			add_action( 'init', array( $this, 'send_report' ), 100 );
 
+			// ensure get_plugins function is exist.
+			if ( ! function_exists( 'get_plugins' ) ) {
+				
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
 			$all_plugins = get_plugins();
 			
 			foreach ( $all_plugins as $key => $value ) {
