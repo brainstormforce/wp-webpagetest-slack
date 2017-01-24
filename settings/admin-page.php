@@ -118,9 +118,15 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 			    <form id="wsn-option-form" action="#" method="post" >
 			     	
 		    		<div class="apmw-config-fields">
+		    		<p class="admin-help">
+					<?php
+					$url = 'http://docs.sharkz.in/how-to-use-webpagetest-slack/';
+					printf( __( 'Get your website automatically tested on webpagetest for performance / speed and get results on Slack. <br> Need help regarding setup? <a href="%s" target="_blank">click here.</a>', 'webpagetest-slack' ), $url );
+				?>
+						</p>
 						<h4><?php _e( 'Webpagetest API Key', 'webpagetest-slack' ); ?></h4>
 						<p class="admin-help">
-							<i><?php _e( 'Enter your Webpagetest API Key here', 'webpagetest-slack' ); ?></i>
+							<?php _e( 'Enter your Webpagetest API Key', 'webpagetest-slack' ); ?>
 						</p>
 					
 						<input type="text" class="regular-text" name="webpage-apikey" value="<?php echo $webpage_apikey; ?>" class="regular-text" />
@@ -132,7 +138,7 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 					<div class="apmw-config-fields">
 						<h4><?php _e( 'URL to Run Test', 'webpagetest-slack' ); ?></h4>
 						<p class="admin-help">
-							<i><?php _e( 'Enter URL to Run Webpagetest', 'webpagetest-slack' ); ?></i>
+							<?php _e( 'Enter URL to Run Webpagetest', 'webpagetest-slack' ); ?>
 						</p>
 						<input type="text" class="regular-text" name="wpttest-url" value="<?php echo $wpttest_url; ?>" class="regular-text" />
 					</div>
@@ -140,15 +146,18 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 					<div class="apmw-config-fields">
 						<h4><?php _e( 'Number of test to Run', 'webpagetest-slack' ); ?></h4>
 						<p class="admin-help">
-							<i><?php _e( 'Enter number of tests to run', 'webpagetest-slack' ); ?></i>
+							<?php _e( 'Enter number of tests to run', 'webpagetest-slack' ); ?>
 						</p>
 						<input type="number" class="regular-text" name="wpttest-tests" value="<?php echo $wpttest_tests; ?>" class="regular-text" />
+						<p class="admin-help">
+							<i><?php _e( 'You can add up to 9 webpagetests to run at time', 'webpagetest-slack' ); ?></i>
+						</p>
 					</div>
 
 			     	<div class="apmw-config-fields">
 						<h4><?php _e( 'Slack Service URL', 'webpagetest-slack' ); ?></h4>
 						<p class="admin-help">
-							<i><?php _e( 'Enter Slack Webhook URL.', 'webpagetest-slack' ); ?></i>
+							<?php _e( 'Enter Slack Webhook URL', 'webpagetest-slack' ); ?>
 						</p>
 						<input type="text" class="regular-text" name="slack-url" value="<?php echo $slack_url; ?>" class="regular-text" />
 						<p class="admin-help">
@@ -159,7 +168,7 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 					<div class="apmw-config-fields">
 						<h4><?php _e( 'Channel', 'webpagetest-slack' ); ?></h4>
 						<p class="admin-help">
-							<i><?php _e( 'Enter Slack Channel name. For example : #general ', 'webpagetest-slack' ); ?></i>
+							<?php _e( 'Enter Slack Channel name. For example : #general ', 'webpagetest-slack' ); ?>
 						</p>
 						<input type="text" class="regular-text" name="slack-channel" value="<?php echo $slack_channel; ?>" class="regular-text" />
 					</div>
