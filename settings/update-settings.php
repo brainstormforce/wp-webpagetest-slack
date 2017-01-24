@@ -347,6 +347,6 @@ if ( ! class_exists( 'WPT_Slack_Update' ) ) {
  */
 function wsn_notify_update() {
 
-	$wpt_slack_update = WPT_Slack_Update::instance();
+	WPT_Slack_Update::instance();
 }
 add_action( 'plugins_loaded', 'wsn_notify_update' );

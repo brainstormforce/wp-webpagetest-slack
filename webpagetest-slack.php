@@ -24,4 +24,4 @@ define( 'WSN_PLUGIN_URL', plugins_url( '/', __FILE__ ) );
  * Initiate plugin
  */
 require_once( WSN_PLUGIN_DIR . 'settings/admin-page.php' );
-$wpt_slack = WPT_Slack::instance();
+WPT_Slack::instance();
