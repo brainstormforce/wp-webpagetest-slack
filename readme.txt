@@ -1,21 +1,23 @@
-=== Webpagetest Slack Notify ===
+=== WebPageTest Slack ===
 Contributors: brainstormforce, rahulwalunje-1
 Tags: webpagetest, speed, performance, performance test, website optimization, pagespeed, notify, slack, api
 Donate link: https://www.brainstormforce.com/payment/
 Requires at least: 3.0
-Tested up to: 4.7
+Stable tag: 1.0.0
+Tested up to: 4.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Notify webpagetest report to your slack channel.
+Get your website automatically tested for performance / speed and get results on Slack.
 
 == Description ==
-Webpagetest Slack Notifies webpagetest test report to your slack channel when you upgrade  or install plugins, themes or WordPress. After update post, pages or add attachment.
+WebpageTest Slack automatically test performance / speed of your website and send result on slack channel when you upgrade or install plugins, themes, WordPress and update post, pages or post type.
 
 == Installation ==
 # How To Get webpagetest.org API Key
 
-Go to [this link](https://www.webpagetest.org/getkey.php) to get webpagetest key.
+Need help to setup WebpageTest Slack? Refer [this doc](http://docs.sharkz.in/how-to-use-webpagetest-slack/).
+
 
 == Changelog ==
 
