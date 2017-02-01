@@ -1,8 +1,6 @@
 === WebPageTest Slack ===
 Contributors: brainstormforce, rahulwalunje-1
-Tags: webpa
-
-getest, speed, performance, performance test, website optimization, pagespeed, notify, slack, api
+Tags: webpagetest, speed, performance, performance test, website optimization, pagespeed, notify, slack, api
 Donate link: https://www.brainstormforce.com/payment/
 Requires at least: 3.0
 Stable tag: 1.0.0
