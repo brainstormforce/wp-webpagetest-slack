@@ -120,7 +120,7 @@ if ( ! class_exists( 'WPT_Slack' ) ) :
 		    		<div class="apmw-config-fields">
 		    		<p class="admin-help">
 					<?php
-					$url = 'http://docs.sharkz.in/how-to-use-webpagetest-slack/';
+					$url = 'https://docs.brainstormforce.com/how-to-use-webpagetest-slack/';
 					printf( __( 'Get your website automatically tested on webpagetest for performance / speed and get results on Slack. <br> Need help regarding setup? <a href="%s" target="_blank">click here.</a>', 'webpagetest-slack' ), $url );
 				?>
 						</p>

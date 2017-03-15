@@ -16,7 +16,7 @@ WebpageTest Slack automatically test performance / speed of your website and sen
 == Installation ==
 # How To Get webpagetest.org API Key
 
-Need help to setup WebpageTest Slack? Refer [this doc](http://docs.sharkz.in/how-to-use-webpagetest-slack/).
+Need help to setup WebpageTest Slack? Refer [this doc](https://docs.brainstormforce.com/how-to-use-webpagetest-slack/).
 
 
 == Changelog ==
