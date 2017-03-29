@@ -18,6 +18,13 @@ WebpageTest Slack automatically test performance / speed of your website and sen
 
 Need help to setup WebpageTest Slack? Refer [this doc](https://docs.brainstormforce.com/how-to-use-webpagetest-slack/).
 
+== Frequently Asked Questions ==
+
+* How much results I can get in a day?
+- The API key is provisioned for up to 200 'page loads' per day. 
+
+== Screenshots ==
+1. Webpagetest Slack Admin Panel
 
 == Changelog ==
 
